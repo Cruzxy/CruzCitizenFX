@@ -53,7 +53,7 @@ Para gerar uma versão standalone da aplicação (.exe) via console, utilize o `
 1. Certifique-se de que todas as dependências estão instaladas.
 2. Execute o seguinte comando no terminal:
    ```bash
-   pyinstaller --onefile --noconsole --name "FivemTokenExtractor" fivem_token_extractor.py
+   python -m PyInstaller --onefile --noconsole --name "FivemTokenExtractor" fivem_token_extractor.py
    ```
 3. O executável final será gerado na pasta `dist/FivemTokenExtractor.exe`.
 
