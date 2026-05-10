@@ -46,13 +46,16 @@ Para iniciar a ferramenta diretamente pelo Python:
 python fivem_token_extractor.py
 ```
 
-### Gerando o Executável (.exe)
+### Gerando o Executável (.exe) manualmente
 
-O projeto inclui um script automatizado para gerar uma versão standalone da aplicação:
+Para gerar uma versão standalone da aplicação (.exe) via console, utilize o `PyInstaller`:
 
-1. Execute o arquivo `build_exe.bat`.
-2. O script instalará as dependências e utilizará o `PyInstaller` para compilar o código.
-3. O executável final estará disponível na pasta `dist/FivemTokenExtractor.exe`.
+1. Certifique-se de que todas as dependências estão instaladas.
+2. Execute o seguinte comando no terminal:
+   ```bash
+   pyinstaller --onefile --noconsole --name "FivemTokenExtractor" fivem_token_extractor.py
+   ```
+3. O executável final será gerado na pasta `dist/FivemTokenExtractor.exe`.
 
 ## 🧪 Tecnologias Utilizadas
 
