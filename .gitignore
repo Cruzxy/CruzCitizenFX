@@ -1,0 +1,8 @@
+__pycache__/
+build/
+dist/
+*.spec
+tokens.json
+.vscode/
+.idea/
+*.exe
