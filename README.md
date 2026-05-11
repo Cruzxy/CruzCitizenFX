@@ -114,4 +114,4 @@ CruzCitizenFX/
 
 ## Licenca
 
-Adicione uma licenca ao repositorio antes de distribuir o projeto publicamente.
+Este projeto esta licenciado sob a licenca MIT. Consulte o arquivo [LICENSE](./LICENSE) para mais detalhes.
