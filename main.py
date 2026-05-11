@@ -5,6 +5,7 @@ import time
 import math
 import sys
 import ctypes
+import os
 
 # ── ADMIN ─────────────────────────────────────────────────────────────────────
 def run_as_admin():
@@ -21,6 +22,15 @@ if not run_as_admin():
     print("Execute como Administrador.")
     input("ENTER para sair...")
     sys.exit(1)
+
+# ── HELPERS ───────────────────────────────────────────────────────────────────
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 # ── DEPS ──────────────────────────────────────────────────────────────────────
 try:
@@ -132,20 +142,42 @@ YELLOW  = "#e8a830"
 YELLOW_LO="#1e1400"
 
 # Fontes — Inter > Segoe UI Variable > Segoe UI (ordem de preferência)
+UI_FONT_STACK = (
+    "Inter",
+    "Aptos",
+    "Aptos Display",
+    "Segoe UI Variable Text",
+    "Segoe UI Variable",
+    "Segoe UI",
+    "Helvetica Neue",
+    "Arial",
+)
+
+MONO_FONT_STACK = (
+    "JetBrains Mono",
+    "Cascadia Code",
+    "Cascadia Mono",
+    "Consolas",
+    "Courier New",
+)
+
 def _best_font(sizes_map):
     """Retorna dict de fontes usando a melhor família disponível."""
     import tkinter.font as tkf
     families = tkf.families()
-    for fam in ("Inter", "Segoe UI Variable Text", "Segoe UI Variable",
-                 "Segoe UI", "Helvetica Neue", "Arial"):
+    for fam in UI_FONT_STACK:
         if fam in families:
             chosen = fam
             break
     else:
         chosen = "Segoe UI"
 
-    # Cascadia Code para mono
-    mono = "Cascadia Code" if "Cascadia Code" in families else "Consolas"
+    for fam in MONO_FONT_STACK:
+        if fam in families:
+            mono = fam
+            break
+    else:
+        mono = "Consolas"
     return chosen, mono
 
 _UI_FAM = None
@@ -156,12 +188,16 @@ def _init_fonts():
     if _UI_FAM: return
     import tkinter.font as tkf
     families = tkf.families()
-    for fam in ("Inter", "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI"):
+    for fam in UI_FONT_STACK:
         if fam in families:
             _UI_FAM = fam; break
     else:
         _UI_FAM = "Segoe UI"
-    _MO_FAM = "Cascadia Code" if "Cascadia Code" in families else "Consolas"
+    for fam in MONO_FONT_STACK:
+        if fam in families:
+            _MO_FAM = fam; break
+    else:
+        _MO_FAM = "Consolas"
 
 def F(size, weight="normal"):
     return (_UI_FAM, size, weight)
@@ -525,6 +561,15 @@ class App(tk.Tk):
         _init_fonts()                       # detecta melhor fonte disponível
 
         self.title("Cruz Token Extractor")
+        
+        # Define o ícone da janela (substitui a 'pena')
+        try:
+            icon_path = resource_path("logo.ico")
+            if os.path.exists(icon_path):
+                self.iconbitmap(icon_path)
+        except:
+            pass
+
         self.configure(bg=BG)
         self.resizable(True, True)
         self._busy = False
@@ -590,11 +635,27 @@ class App(tk.Tk):
         logo = tk.Frame(row, bg=PANEL)
         logo.pack(side="left", pady=10)
 
-        ic = tk.Canvas(logo, width=20, height=20,
-                       bg=PANEL, highlightthickness=0)
-        ic.pack(side="left", padx=(0, 10))
-        ic.create_oval(1, 1, 19, 19, fill=BLUE_LO, outline=BLUE, width=1)
-        ic.create_oval(7, 7, 13, 13, fill=BLUE, outline="")
+        # Logo - ícone (substitui o círculo azul)
+        self._logo_img = None
+        logo_loaded = False
+        try:
+            from PIL import Image, ImageTk
+            icon_path = resource_path("logo.ico")
+            if os.path.exists(icon_path):
+                img = Image.open(icon_path).resize((22, 22), Image.Resampling.LANCZOS)
+                self._logo_img = ImageTk.PhotoImage(img)
+                ic = tk.Label(logo, image=self._logo_img, bg=PANEL)
+                ic.pack(side="left", padx=(0, 10))
+                logo_loaded = True
+        except Exception:
+            pass
+
+        if not logo_loaded:
+            ic = tk.Canvas(logo, width=20, height=20,
+                           bg=PANEL, highlightthickness=0)
+            ic.pack(side="left", padx=(0, 10))
+            ic.create_oval(1, 1, 19, 19, fill=BLUE_LO, outline=BLUE, width=1)
+            ic.create_oval(7, 7, 13, 13, fill=BLUE, outline="")
 
         tk.Label(logo, text="Cruz Token Extractor", font=F(11, "bold"),
                  bg=PANEL, fg=FG).pack(side="left")
