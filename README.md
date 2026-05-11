@@ -72,11 +72,9 @@ Se desejar compilar o projeto para um arquivo executável único:
 - **Threading**: Processamento em background para manter a UI responsiva.
 - **Ctypes**: Integração com a API do Windows para controle de privilégios.
 
-## 🎓 Créditos
-
-Este projeto foi desenvolvido como parte de estudos avançados em **Mineração de Dados** e automação.
 
 ---
+
 > [!WARNING]
 > **Aviso Ético**: Esta ferramenta deve ser utilizada exclusivamente para fins de teste, desenvolvimento e depuração de suas próprias conexões. O uso indevido para violar termos de serviço de terceiros é de total responsabilidade do usuário.
 
