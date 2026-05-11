@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./logo.ico" alt="Cruz Token Extractor" width="72" height="72">
+  <img src="./logo.png" alt="Cruz Token Extractor" width="96" height="96">
 </p>
 
 <h1 align="center">Cruz Token Extractor</h1>
@@ -89,6 +89,7 @@ dist/CruzTokenExtractor.exe
 ```text
 CruzCitizenFX/
 |-- main.py
+|-- logo.png
 |-- logo.ico
 |-- CruzTokenExtractor.spec
 |-- README.md
