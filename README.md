@@ -61,7 +61,7 @@ Se desejar compilar o projeto para um arquivo executável único:
 
 2. Execute o comando de build:
    ```bash
-   python -m PyInstaller --onefile --noconsole --name "CruzTokenExtractor" --icon=NONE main.py
+    python -m PyInstaller --onefile --noconsole --uac-admin --name "CruzTokenExtractor" --icon="logo.ico" main.py
    ```
 3. O arquivo final estará disponível na pasta `dist/`.
 
