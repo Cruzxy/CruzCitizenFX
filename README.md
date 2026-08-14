@@ -32,7 +32,7 @@ O projeto prioriza uma experiencia simples: uma acao principal, logs visiveis em
 - Tema escuro com componentes compactos para uso tecnico.
 - Console integrado com logs em tempo real.
 - Execucao em background para manter a interface responsiva.
-- Deteccao de dependencia `pymem` e permissao de administrador.
+- Deteccao de dependencia `psutil` e permissao de administrador.
 - Suporte a icone do aplicativo em desenvolvimento e build.
 - Stack de fontes com foco SaaS/dev: `Inter`, `Aptos`, `Segoe UI`, `JetBrains Mono` e `Cascadia Code`, conforme disponibilidade no sistema.
 
@@ -42,7 +42,7 @@ O projeto prioriza uma experiencia simples: uma acao principal, logs visiveis em
 - Python 3.10 ou superior.
 - Permissao de administrador para leitura local de memoria de processos.
 - Dependencias Python:
-  - `pymem`
+  - `psutil`
   - `Pillow` para carregar o icone na interface.
   - `pyinstaller` apenas para gerar o executavel.
 
@@ -58,7 +58,7 @@ cd CruzCitizenFX
 Instale as dependencias:
 
 ```bash
-pip install pymem Pillow
+pip install psutil Pillow
 ```
 
 Execute em modo desenvolvimento:
@@ -101,7 +101,7 @@ CruzCitizenFX/
 
 - Python
 - Tkinter
-- Pymem
+- psutil
 - Pillow
 - PyInstaller
 - Windows API via `ctypes`
